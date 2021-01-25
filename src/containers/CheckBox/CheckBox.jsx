@@ -2,22 +2,22 @@ import React from 'react';
 
 import styles from './CheckBox.module.scss';
 
-const CheckBox = ({ category, checkedList, handleCheckedList }) => {
+const CheckBox = ({ category, categoriesList, handleCategoriesList }) => {
   const { id, name } = category;
-  const isChecked = checkedList.find((checkedId) => +checkedId === +id);
+  const isChecked = categoriesList.find((checkedId) => +checkedId === +id);
 
   const onCheckboxHandler = () => {
-    const checkedIndex = checkedList.findIndex(
+    const checkedIndex = categoriesList.findIndex(
       (checkedId) => +checkedId === +id
     );
     if (checkedIndex >= 0) {
-      handleCheckedList((checkList) => {
+      handleCategoriesList((checkList) => {
         const copyArr = [...checkList];
         copyArr.splice(checkedIndex, 1);
         return copyArr;
       });
     } else {
-      handleCheckedList((checkList) => [...checkList, +id]);
+      handleCategoriesList((checkList) => [...checkList, +id]);
     }
   };
 

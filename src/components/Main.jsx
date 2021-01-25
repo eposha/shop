@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import SideBar from './SideBar/SideBar';
 import MainContent from './MainContent/MainContent';
-import { data } from './data';
+import withData from '../HOC/withData';
 import styles from './Main.module.scss';
 
-const Main = () => {
+const Main = ({ data }) => {
   const [cardsList, setCardsList] = useState(data);
 
   return (
@@ -19,4 +19,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default withData(Main);

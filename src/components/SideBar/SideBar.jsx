@@ -1,49 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { filteredData } from './filters';
+import { cityItemList } from './cityItemList';
+import { useSideBar } from './useSideBar';
 import CityList from '../../containers/CityList/CityList';
 import Categories from '../Categories/Categories';
 import PriceRange from '../../containers/PriceRange/PriceRange';
 
 import styles from './SideBar.module.scss';
 
-const SideBar = ({ cardsList }) => {
+const SideBar = ({ cardsList, setCardsList }) => {
   const history = useHistory();
   const { search } = useLocation();
 
-  let filterData = {};
-  const searchParams = new URLSearchParams(search);
-  for (let p of searchParams) {
-    filterData = {
-      ...filterData,
-      ...Object.fromEntries([p]),
-    };
-  }
+  const {
+    filterData,
+    categoriesListDefault,
+    maxPrice,
+    minPrice,
+    defaultCity,
+  } = useSideBar(cardsList, cityItemList);
 
-  const checkedListDefault = filterData.categories
-    ? filterData.categories.split(',')
-    : [];
-
-  const pricesList = cardsList.map((card) => card.price);
-  const maxPrice = Math.max(...pricesList);
-  const minPrice = Math.min(...pricesList);
-
-  const [city, setCity] = useState(filterData.city ?? '');
-  const [checkedList, handleCheckedList] = useState(checkedListDefault);
+  const [city, setCity] = useState(defaultCity);
+  const [categoriesList, handleCategoriesList] = useState(
+    categoriesListDefault
+  );
   const [priceRange, handlePriceRange] = useState([
     filterData.priceFrom ?? minPrice,
     filterData.priceTo ?? maxPrice,
   ]);
 
+  useEffect(() => {
+    if (Object.keys(filterData).length) {
+      const dataWithFilter = filteredData(
+        filterData,
+        city,
+        categoriesList,
+        priceRange,
+        cardsList
+      );
+      setCardsList(dataWithFilter);
+    }
+  }, [search]);
+
   const submit = (event) => {
     event.preventDefault();
     const params = new URLSearchParams();
 
-    const categories = checkedList.length
-      ? checkedList.reduce((acc, nextValue) => `${acc}${',' + nextValue}`)
+    const categories = categoriesList.length
+      ? categoriesList.reduce((acc, nextValue) => `${acc}${',' + nextValue}`)
       : null;
-    const priceFrom = priceRange[0];
-    const priceTo = priceRange[1];
-    const queryData = { city, categories, priceFrom, priceTo };
+
+    const [priceFrom, priceTo] = priceRange;
+
+    const queryData = { city: city.id, categories, priceFrom, priceTo };
 
     for (let key in queryData) {
       if (queryData[key]) {
@@ -56,10 +66,10 @@ const SideBar = ({ cardsList }) => {
   return (
     <div className={styles.sideBar}>
       <form className={styles.filterForm} onSubmit={submit}>
-        <CityList city={city} setCity={setCity} />
+        <CityList city={city} setCity={setCity} cityItemList={cityItemList} />
         <Categories
-          checkedList={checkedList}
-          handleCheckedList={handleCheckedList}
+          categoriesList={categoriesList}
+          handleCategoriesList={handleCategoriesList}
         />
         <PriceRange
           handlePriceRange={handlePriceRange}

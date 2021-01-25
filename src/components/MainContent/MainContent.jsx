@@ -6,13 +6,17 @@ import styles from './MainContent.module.scss';
 const MainContent = ({ cardsList }) => {
   return (
     <div className={styles.mainContent}>
-      <ul className={styles.cardList}>
-        {cardsList.map((cardData) => (
-          <li key={cardData.id} className={styles.cardItem}>
-            <CardItem cardData={cardData} />
-          </li>
-        ))}
-      </ul>
+      {cardsList.length ? (
+        <ul className={styles.cardList}>
+          {cardsList.map((cardData) => (
+            <li key={cardData.id} className={styles.cardItem}>
+              <CardItem cardData={cardData} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <span className={styles.notFound}>This products not found</span>
+      )}
     </div>
   );
 };

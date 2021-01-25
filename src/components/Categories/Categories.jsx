@@ -4,7 +4,7 @@ import CheckBox from '../../containers/CheckBox/CheckBox';
 
 import styles from './Categories.module.scss';
 
-const Categories = ({ checkedList, handleCheckedList }) => {
+const Categories = ({ categoriesList, handleCategoriesList }) => {
   return (
     <div className={styles.categories}>
       <div className={styles.title}>Categories</div>
@@ -13,8 +13,8 @@ const Categories = ({ checkedList, handleCheckedList }) => {
         <CheckBox
           key={category.id}
           category={category}
-          checkedList={checkedList}
-          handleCheckedList={handleCheckedList}
+          categoriesList={categoriesList}
+          handleCategoriesList={handleCategoriesList}
         />
       ))}
     </div>

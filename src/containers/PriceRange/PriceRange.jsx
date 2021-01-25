@@ -54,12 +54,11 @@ const PriceRange = ({ handlePriceRange, maxPrice, minPrice, filterData }) => {
   const [value, setValue] = useState([minPriceDefault, maxPriceDefault]);
 
   const handleChange = (event, newValue) => {
-    handlePriceRange((priceRange) => {
-      return [
-        Math.floor(newValue[0] * converedRange),
-        Math.floor(newValue[1] * converedRange),
-      ];
-    });
+    handlePriceRange([
+      Math.floor(newValue[0] * converedRange),
+      Math.floor(newValue[1] * converedRange),
+    ]);
+
     setValue(newValue);
   };
 

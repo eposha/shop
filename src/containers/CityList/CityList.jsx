@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { cityItemList } from './cityItemList';
 import AutoClose from '../../utils/AutoClose';
 import { arrowSelect } from '../../assets/svgIcons';
 
 import styles from './CityList.module.scss';
 
-const CityList = ({ city, setCity }) => {
+const CityList = ({ city, setCity, cityItemList }) => {
   const [isOpenList, toggleOpenList] = useState(false);
   const [inputValue, setInputValue] = useState(city);
 
@@ -28,7 +27,7 @@ const CityList = ({ city, setCity }) => {
       <div className={styles.inputWrap}>
         <input
           className={styles.inputField}
-          value={inputValue}
+          value={inputValue.name ?? ''}
           onChange={onChange}
           onClick={() => toggleOpenList(true)}
           placeholder={'Select...'}
@@ -44,7 +43,7 @@ const CityList = ({ city, setCity }) => {
                   <li
                     key={cityItem.id}
                     className={styles.cityItem}
-                    onClick={() => setCityData(cityItem.name)}>
+                    onClick={() => setCityData(cityItem)}>
                     {cityItem.name}
                   </li>
                 ))}
