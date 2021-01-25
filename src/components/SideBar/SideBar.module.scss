@@ -1,0 +1,32 @@
+@import '../../variables';
+
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  .filterForm {
+    width: 100%;
+    .formFooter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      .priceWrap {
+        display: flex;
+        width: 110px;
+        .price {
+          width: 50px;
+          font-weight: 500;
+        }
+        .dash {
+          margin-right: 9px;
+        }
+      }
+    }
+    .submitBtn {
+      width: 100px;
+      height: 35px;
+      color: #fff;
+      background-color: $main-color;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import '../../variables';
+
+.cityList {
+  margin-bottom: 60px;
+  .title {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .inputWrap {
+    position: relative;
+    margin-top: 30px;
+    .inputField {
+      display: inline-block;
+      padding: 0 16px;
+      width: 100%;
+      height: 42px;
+      border: 1px solid #dee0e1;
+    }
+    .inputField:focus + .arrowSelect {
+      transform: rotate(180deg);
+      svg path {
+        fill: $main-color;
+      }
+    }
+    .arrowSelect {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+    }
+    .cityListData {
+      position: absolute;
+      width: 100%;
+      top: 42px;
+      padding-top: 8px;
+      max-height: 200px;
+      overflow: scroll;
+      border: 1px solid #dee0e1;
+      background-color: #fff;
+      z-index: 5;
+      .cityItem {
+        margin: 0 8px;
+        padding: 0 8px;
+        line-height: 32px;
+        cursor: pointer;
+        &:hover {
+          border-radius: 8px;
+          background-color: $main-color;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

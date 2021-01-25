@@ -1,0 +1,8 @@
+.mainContent {
+  width: 100%;
+  .cardList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
