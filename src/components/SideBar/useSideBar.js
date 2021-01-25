@@ -1,8 +1,6 @@
-// import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 export const useSideBar = (cardsList, cityItemList) => {
-  console.log(cardsList);
   const { search } = useLocation();
   let filterData = {};
   const searchParams = new URLSearchParams(search);

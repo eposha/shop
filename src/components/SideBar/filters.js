@@ -25,7 +25,6 @@ export const filteredData = (
   let filteredCards = [...cardsList];
 
   if (city) {
-    console.log('city', city);
     filteredCards = filterByCity(city, filteredCards);
   }
   if (categoriesList.length) {
